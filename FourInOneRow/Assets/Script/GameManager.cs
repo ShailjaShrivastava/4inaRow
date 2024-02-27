@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviour, IPointerClickHandler
 {
     // Reference to the grid object
     public Grid grid;
@@ -16,7 +17,7 @@ public class GameManager : MonoBehaviour
     // Update method handles game logic and user input
     void Update()
     {
-        if (!gameOver)
+        /*  if (!gameOver)
         {
             // Handle player input (e.g., mouse click)
             if (Input.GetMouseButtonDown(0))
@@ -28,6 +29,61 @@ public class GameManager : MonoBehaviour
             {
                 PlaceAIPiece();
             }
+        } */
+
+
+        if (!gameOver)
+    {
+        // Check for left mouse click
+        if (Input.GetMouseButtonDown(0))
+        {
+            // Perform a raycast from the camera towards the mouse click position
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            // Check if the raycast hits the grid object
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+            {
+                if (hit.collider.gameObject == grid.gameObject)
+                {
+                    // Convert the hit point to a grid position
+                    Vector2 gridPosition = hit.point - grid.transform.position;
+                    int x = Mathf.FloorToInt(gridPosition.x);
+                    int y = Mathf.FloorToInt(gridPosition.y);
+
+                    // Get the cell at the calculated position
+                    Cell clickedCell = grid.cells[x, y];
+
+                    // Place the player piece and continue game logic
+                    PlacePlayerPiece(clickedCell);
+                }
+            }
+        }
+        // Handle AI turn (if implemented)
+        else if (currentPlayer == 2)
+        {
+            PlaceAIPiece();
+        }
+    }
+
+
+
+    }
+
+
+
+
+
+        public void OnPointerClick(PointerEventData eventData)
+    {
+        if (!gameOver && eventData.pointerEnter.tag == "Grid") // Assuming grid object has a tag "Grid"
+        {
+            Vector2 gridPosition = eventData.pointerEnter.transform.position - grid.transform.position;
+            int x = Mathf.FloorToInt(gridPosition.x);
+            int y = Mathf.FloorToInt(gridPosition.y);
+
+            Cell clickedCell = grid.cells[x, y];
+            PlacePlayerPiece(clickedCell);
         }
     }
 
@@ -36,7 +92,9 @@ public class GameManager : MonoBehaviour
     {
         if (cell.isEmpty)
         {
-            grid.PlacePiece(cell.transform.position.x, cell.transform.position.y, currentPlayer);
+          //  grid.PlacePiece(cell.transform.position.x, cell.transform.position.y, currentPlayer);
+          grid.PlacePiece(Mathf.FloorToInt(cell.transform.position.x), Mathf.FloorToInt(cell.transform.position.y), currentPlayer);
+
             CheckWin();
             SwitchTurn();
         }

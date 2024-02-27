@@ -12,7 +12,7 @@ public class Grid : MonoBehaviour
     public Transform cellPrefab;
 
     // Array to store cell references
-    private Cell[,] cells;
+    public Cell[,] cells;
 
     // Start method initializes the grid upon game start
     void Start()
