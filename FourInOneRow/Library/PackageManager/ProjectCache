@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638444794177169767
-    m_Hash: 1421907397
+      ticks: 638448248484703634
+    m_Hash: 755808496
   m_LockFileStatus:
     m_FilePath: C:/Users/shail/Desktop/4inaRow/FourInOneRow/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638444794710093453
-    m_Hash: 2494348924
+      ticks: 638448248484703634
+    m_Hash: 623110053
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_LocalPackages:
@@ -333,6 +333,7 @@ m_ResolvedPackages:
     - 3.0.25
     - 3.0.26
     - 3.0.27
+    - 3.0.28
     compatible:
     - 3.0.18
     - 3.0.20
@@ -342,7 +343,8 @@ m_ResolvedPackages:
     - 3.0.25
     - 3.0.26
     - 3.0.27
-    verified: 3.0.27
+    - 3.0.28
+    verified: 3.0.28
   dependencies:
   - name: com.unity.ext.nunit
     version: 1.0.6
